@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import People from './People';
+import AddPerson from './AddPerson';
 
 class App extends Component{
-
   state = {
     people : [
       { name: "Ioana", age: "33", position: "intern", id :1 },
@@ -11,12 +11,32 @@ class App extends Component{
     ]
   }
 
-  render (){
-    return(
+  addPerson = ( person ) => {
+    person.id=Math.random(); //automatically adding an id
+    let people = [...this.state.people, person]; //making a copy of the state and adding a person so that we don't alter the initial state
+    this.setState({
+      people:people
+    })
+  }
+
+  deletePerson = ( id ) => {
+    let people = this.state.people.filter(person =>{
+      return person.id !== id
+      }) 
+      this.setState({
+        people: people
+      })
+    //cycles through the array, if find id then returns false => removes, else does nothing
+  }
+
+
+  render() {
+    return (
       <div className="App"> 
-        <div> MY FIRST REACT APP </div>
-        <p> Welcome! :) </p>
-        <People people={this.state.people} />
+        <h1> MY FIRST REACT APP </h1>
+        <p> Welcome :) </p>
+        <People deletePerson={ this.deletePerson } people={ this.state.people } />
+        <AddPerson  addPerson={ this.addPerson } />
       </div>
     )
   }
