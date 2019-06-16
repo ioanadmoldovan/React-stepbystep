@@ -29,6 +29,14 @@ class App extends Component{
     //cycles through the array, if find id then returns false => removes, else does nothing
   }
 
+  componentDidMount(){
+    console.log( 'component was mounted' );
+  }
+
+  componentDidUpdate(prevProps, prevState) { // we had before the change
+    console.log( 'component was updated' );
+    console.log( prevProps, prevState );
+  }
 
   render() {
     return (
